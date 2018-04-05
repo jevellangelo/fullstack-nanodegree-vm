@@ -13,7 +13,7 @@ HTML_WRAP = '''\
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DB Forum</title>
+    <title>Jevell's First Forum</title>
     <style>
       h1, form { text-align: center; }
       textarea { width: 400px; height: 100px; }
@@ -25,7 +25,7 @@ HTML_WRAP = '''\
     </style>
   </head>
   <body>
-    <h1>DB Forum</h1>
+    <h1>Jevell's First Forum</h1>
     <form method=post>
       <div><textarea id="content" name="content"></textarea></div>
       <div><button id="go" type="submit">Post message</button></div>
@@ -40,7 +40,6 @@ HTML_WRAP = '''\
 POST = '''\
     <div class=post><em class=date>%s</em><br>%s</div>
 '''
-
 
 @app.route('/', methods=['GET'])
 def main():
