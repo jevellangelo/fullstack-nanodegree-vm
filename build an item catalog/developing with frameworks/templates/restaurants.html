@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+
+	</head>
+<body>
+
+<h1>Restaurants</h1>
+
+<div class = 'pane'>
+{% for restaurant in restaurants %}
+
+<div>
+
+<!-- <a href = "#">  -->
+	<h3>{{restaurant.name}}</h3>
+<!-- </a> -->
+
+<p><a href = "#">Edit Restaurant</a></p>
+
+<p> <a href = "#">Delete Restaurant</a> </p>
+
+</div>
+
+
+{% endfor %}
+</div>
+</body>
+
+</html>
