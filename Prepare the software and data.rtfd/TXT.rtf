@@ -1,0 +1,161 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
+\f3\fswiss\fcharset0 Helvetica-Oblique;\f4\froman\fcharset0 Times-Bold;\f5\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red35\green46\blue57;\red62\green62\blue62;\red255\green255\blue255;
+\red14\green32\blue46;\red245\green245\blue246;\red21\green163\blue221;\red210\green0\blue53;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\cssrgb\c18039\c23922\c28627;\cssrgb\c30980\c30980\c30980;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c5882\c16863\c23922;\cssrgb\c96863\c96863\c97255;\cssrgb\c784\c70196\c89412;\cssrgb\c86667\c6667\c26667;\cssrgb\c0\c0\c0;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\margl1440\margr1440\vieww15680\viewh14780\viewkind0
+\deftab720
+\pard\pardeftab720\sl640\sa100\partightenfactor0
+
+\f0\b\fs60 \cf2 \expnd0\expndtw0\kerning0
+Prepare the software and data\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf3 \cb4 To start on this project, you'll need database software (provided by a Linux virtual machine) and the data to analyze.\
+\pard\pardeftab720\sl640\sa100\partightenfactor0
+
+\f0\b\fs48 \cf2 The virtual machine\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf3 This project makes use of the same Linux-based virtual machine (VM) as the preceding lessons.\
+If you skipped those lessons and came right to this project, that's OK! However, you will need to go back to the instructions to install the virtual machine. Please see previous lessons to complete the installation process.\
+This will give you the PostgreSQL database and support software needed for this project. If you have used an older version of this VM, you may need to install it into a new directory.\
+\pard\pardeftab720\sl540\partightenfactor0
+\cf3 If you need to bring the virtual machine back online (with\'a0
+\f2 \cf5 \cb6 \uc0\u8237 vagrant up
+\f1 \cf3 \cb4 \uc0\u8236 ), do so now. Then log into it with\'a0
+\f2 \cf5 \cb6 \uc0\u8237 vagrant ssh
+\f1 \cf3 \cb4 \uc0\u8236 .\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 {{\NeXTGraphic Pasted Graphic.png \width9020 \height5860 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl640\sa100\partightenfactor0
+
+\f0\b\fs48 \cf2 \cb4 \expnd0\expndtw0\kerning0
+Download the data\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf3 Next,\'a0{\field{\*\fldinst{HYPERLINK "https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip"}}{\fldrslt \cf7 download the data here.}}\'a0You will need to unzip this file after downloading it. The file inside is called\'a0
+\f2 \cf5 \cb6 \uc0\u8237 newsdata.sql
+\f1 \cf3 \cb4 \uc0\u8236 . Put this file into the\'a0
+\f2 \cf5 \cb6 \uc0\u8237 vagrant
+\f1 \cf3 \cb4 \uc0\u8236 \'a0directory, which is shared with your virtual machine.\
+To build the reporting tool, you'll need to load the site's data into your local database. Review how to use the\'a0
+\f2 \cf5 \cb6 \uc0\u8237 psql
+\f1 \cf3 \cb4 \uc0\u8236 \'a0command in this lesson:\'a0{\field{\*\fldinst{HYPERLINK "https://classroom.udacity.com/nanodegrees/nd004-ent/parts/72d6fe39-3e47-45b4-ac52-9300b146094f/modules/0f94ae26-c39d-4231-924b-b1eb6e06cf41/lessons/96869cfc-c67e-4a6c-9df2-9f93267b7be5/concepts/0b4079f5-6e64-4dd8-aee9-5c3a0db39840?contentVersion=1.0.0&contentLocale=en-us"}}{\fldrslt \cf7 (FSND version)}}\
+To load the data,\'a0
+\f2 \cf5 \cb6 \uc0\u8237 cd
+\f1 \cf3 \cb4 \uc0\u8236 \'a0into the\'a0
+\f2 \cf5 \cb6 \uc0\u8237 vagrant
+\f1 \cf3 \cb4 \uc0\u8236 \'a0directory and use the command\'a0
+\f2 \cf5 \cb6 \uc0\u8237 psql -d news -f newsdata.sql
+\f1 \cf3 \cb4 \uc0\u8236 .\cb1 \uc0\u8232 \cb4 Here's what this command does:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl400\partightenfactor0
+\ls1\ilvl0
+\f2\fs24 \cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\uc0\u8237 psql
+\f1 \cf3 \cb4 \uc0\u8236 \'a0\'97 the PostgreSQL command line program\cb1 \
+\ls1\ilvl0
+\f2 \cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\uc0\u8237 -d news
+\f1 \cf3 \cb4 \uc0\u8236 \'a0\'97 connect to the database named news which has been set up for you\cb1 \
+\ls1\ilvl0
+\f2 \cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\uc0\u8237 -f newsdata.sql
+\f1 \cf3 \cb4 \uc0\u8236 \'a0\'97 run the SQL statements in the file newsdata.sql\cb1 \
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\fs32 \cf3 \cb4 Running this command will connect to your installed database server and execute the SQL commands in the downloaded file, creating tables and populating them with data.\
+\pard\pardeftab720\sl533\sa100\partightenfactor0
+
+\f0\b\fs40 \cf2 Getting an error?\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf3 If this command gives an error message, such as \'97\cb1 \uc0\u8232 
+\f2 \cf5 \cb6 \uc0\u8237 psql: FATAL: database "news" does not exist
+\f1 \cf3 \cb1 \uc0\u8236 \uc0\u8232 
+\f2 \cf5 \cb6 \uc0\u8237 psql: could not connect to server: Connection refused
+\f1 \cf3 \cb1 \uc0\u8236 \uc0\u8232 \cb4 \'97 this means the database server is not running or is not set up correctly. This can happen if you have an\'a0
+\f3\i older version
+\f1\i0 \'a0of the VM configuration from before this project was added. To continue,\'a0{\field{\*\fldinst{HYPERLINK "https://classroom.udacity.com/nanodegrees/nd004/parts/51200cee-6bb3-4b55-b469-7d4dd9ad7765/modules/c57b57d4-29a8-4c5f-9bb8-5d53df3e48f4/lessons/5475ecd6-cfdb-4418-85a2-f2583074c08d/concepts/14c72fe3-e3fe-4959-9c4b-467cf5b7c3a0"}}{\fldrslt \cf7 download the virtual machine configuration}}\'a0into a fresh new directory and start it from there.\
+\pard\pardeftab720\sl640\sa100\partightenfactor0
+
+\f0\b\fs48 \cf2 Explore the data\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf3 Once you have the data loaded into your database, connect to your database using\'a0
+\f2 \cf5 \cb6 \uc0\u8237 psql -d news
+\f1 \cf3 \cb4 \uc0\u8236 and explore the tables using the\'a0
+\f2 \cf5 \cb6 \uc0\u8237 \\dt
+\f1 \cf3 \cb4 \uc0\u8236 \'a0and\'a0
+\f2 \cf5 \cb6 \uc0\u8237 \\d table
+\f1 \cf3 \cb4 \uc0\u8236 \'a0commands and\'a0
+\f2 \cf5 \cb6 \uc0\u8237 select
+\f1 \cf3 \cb4 \uc0\u8236 \'a0statements.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl400\partightenfactor0
+\ls2\ilvl0
+\f2\fs24 \cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\uc0\u8237 \\dt
+\f1 \cf3 \cb4 \uc0\u8236 \'a0\'97 display tables \'97 lists the tables that are available in the database.\cb1 \
+\ls2\ilvl0
+\f2 \cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\uc0\u8237 \\d table
+\f1 \cf3 \cb4 \uc0\u8236 \'a0\'97 (replace\'a0
+\f3\i table
+\f1\i0 \'a0with the name of a table) \'97 shows the database schema for that particular table.\cb1 \
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\fs32 \cf3 \cb4 Get a sense for what sort of information is in each column of these tables.\
+The database includes three tables:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl400\partightenfactor0
+\ls3\ilvl0
+\fs24 \cf3 \cb4 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+The\'a0
+\f2 \cf5 \cb6 \uc0\u8237 authors
+\f1 \cf3 \cb4 \uc0\u8236 \'a0table includes information about the authors of articles.\cb1 \
+\ls3\ilvl0\cb4 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+The\'a0
+\f2 \cf5 \cb6 \uc0\u8237 articles
+\f1 \cf3 \cb4 \uc0\u8236 \'a0table includes the articles themselves.\cb1 \
+\ls3\ilvl0\cb4 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+The\'a0
+\f2 \cf5 \cb6 \uc0\u8237 log
+\f1 \cf3 \cb4 \uc0\u8236 \'a0table includes one entry for each time a user has accessed the site.\cb1 \
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\fs32 \cf3 \cb4 As you explore the data, you may find it useful to take notes! Don't try to memorize all the columns. Instead, write down a description of the column names and what kind of values are found in those columns.\
+\pard\pardeftab720\sl533\sa100\partightenfactor0
+
+\f4\b\fs40 \cf2 Connecting from your code\cb1 \
+\pard\pardeftab720\sl400\sa300\partightenfactor0
+
+\f5\b0\fs24 \cf3 \cb4 The database that you're working with in this project is running PostgreSQL, like the\'a0
+\f2 \cf5 \cb6 \uc0\u8237 forum
+\f5 \cf3 \cb4 \uc0\u8236 \'a0database that you worked with in the course. So in your code, you'll want to use the\'a0
+\f2 \cf5 \cb6 \uc0\u8237 psycopg2
+\f5 \cf3 \cb4 \uc0\u8236 \'a0Python module to connect to it, for instance:\cb1 \
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f2 \cf5 \cb6 \uc0\u8237 db = psycopg2.connect(\cf8 "dbname=news"\cf5 )\uc0\u8236 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls4\ilvl0
+\f3\i\fs28 \cf2 \cb1 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\uc0\u8232 
+\f5\i0\fs21 \uc0\u8232 
+\fs24 \cf9 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\f1\fs32 \cf3 \cb4 \
+}
