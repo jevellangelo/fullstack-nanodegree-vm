@@ -1,6 +1,5 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# python 2
-
 # Internal reporting tool using the DB-API Psycopg2
 
 import psycopg2
@@ -8,99 +7,87 @@ from unicodedata import *
 
 DBNAME = "news"
 
+# Database query for top_articles: 
+#   What are the three most popular articles of all time?
+request_articles = """SELECT articles.title, COUNT(log.status) AS views
+            FROM log, articles
+            WHERE SUBSTRING(log.path, 10) = articles.slug
+            AND log.status = '200 OK'
+            GROUP BY articles.title
+            ORDER BY views DESC
+            LIMIT 3;
+            """
+
+# Database query for top_authors: 
+#   Who are the most popular article authors of all time?
+request_authors = """SELECT authors.name, COUNT(articles.slug) AS views
+            FROM articles, authors, log
+            WHERE SUBSTRING(log.path, 10) = articles.slug
+            AND authors.id = articles.author
+            GROUP BY authors.name
+            ORDER BY views DESC;
+            """
+
+# Database query for most_errors: 
+#   On which days did more than 1% of requests lead to errors?
+request_errors = """SELECT to_char(date, 'FMMonth DD, YYYY'), percent
+            FROM (
+                SELECT errors.date,
+                round((errors.errors::numeric/requests.all_requests::numeric)*100,2)
+                AS percent
+                FROM errors, requests
+                WHERE errors.date = requests.date
+                ) AS foo
+            WHERE percent > 1.0;
+            """
+
+
+# Query data from database, open and close the connection
+def sql_query(sql_request):
+    try:
+		conn = psycopg2.connect(database=DBNAME)
+		c = conn.cursor()
+		# Print PostgreSQL Connection properties for debugging
+		# print(conn.get_dsn_parameters(),"\n")
+		c.execute(sql_request)
+		results = c.fetchall()
+    except psycopg2.DatabaseError, e:
+        print("Error connecting to {} database.\nError: {}".format(DBNAME, e))
+    finally:
+   		if conn is not None:
+			conn.close()
+			return results
+
+
 def top_articles():
-	"""Prints the top 3 articles in a sorted list"""
-	conn = psycopg2.connect(database=DBNAME)
-	c = conn.cursor()
-	c.execute(
-		"SELECT articles.title, COUNT(log.status) AS views \
-			FROM log \
-			JOIN articles \
-			ON log.path LIKE CONCAT('%', articles.slug, '%') \
-			WHERE log.status LIKE '200%' \
-			GROUP BY articles.title \
-			ORDER BY views DESC \
-			LIMIT 3;")
-	top_3 = c.fetchall()
-	conn.close()
-	print('Most popular three articles of all time:')
-	for row in top_3:
-		print('  ' + u'\u2022' +  ' "%s" -- %s views' % row)
+    """Prints the top 3 articles in a sorted list"""
+    top_3 = sql_query(request_articles)
+    print('Most popular three articles of all time:')
+    for row in top_3:
+        print(('  ' + u'\u2022' + ' "{}" -- {} views').format(row[0],row[1]))
+        # print(row)
+    print('\n')
 
-	print('\n')
-
-
-top_articles()
 
 def top_authors():
-	"""Prints the top authors in a sorted list"""
-	conn = psycopg2.connect(database=DBNAME)
-	c = conn.cursor()
-	c.execute(
-		"CREATE VIEW authorSlug as \
-			SELECT authors.name, articles.slug \
-			FROM articles, authors \
-			WHERE authors.id = articles.author;")
-	c.execute(
-		"SELECT authorSlug.name, COUNT(log.status) AS views \
-			FROM authorSlug, log JOIN articles \
-			ON log.path LIKE CONCAT('%', articles.slug, '%') \
-			WHERE log.status LIKE '200%' \
-			GROUP BY authorSlug.name \
-			ORDER BY views desc;")
-	most_popular = c.fetchall()
-	conn.close()
-	print('Most popular article authors of all time:')
-	for row in most_popular:
-		print('  ' + u'\u2022' + ' %s -- %s views' % row)
+    """Prints the top authors in a sorted list"""
+    most_popular = sql_query(request_authors)
+    print('Most popular article authors of all time:')
+    for row in most_popular:
+        print(('  ' + u'\u2022' + ' {} -- {} views').format(row[0],row[1]))
+    print('\n')
 
-	print('\n')
-
-top_authors()
 
 def most_errors():
-	"""Prints which days did more than 1% of requests lead to errors"""
-	conn = psycopg2.connect(database=DBNAME)
-	c = conn.cursor()
-	c.execute(
-		"CREATE VIEW no_error AS \
-			SELECT REGEXP_REPLACE(to_char(log.time, 'Month DD, YYYY'),'\s+',' ') AS date, \
-			count(log.status) AS views \
-			FROM log \
-			WHERE (log.status = '200 OK'::text) \
-			GROUP BY date \
-			ORDER BY date DESC;")
-	c.execute(
-		"CREATE VIEW error AS \
-			SELECT REGEXP_REPLACE(to_char(log.time, 'Month DD, YYYY'),'\s+',' ') AS date, \
-			count(log.status) AS no_views \
-			FROM log \
-			WHERE (log.status <> '200 OK'::text) \
-			GROUP BY date \
-			ORDER BY date DESC;")
-	c.execute(
-		"CREATE VIEW all_views AS \
-			SELECT error.date, \
-			no_error.views, \
-			error.no_views \
-			FROM (error \
-			JOIN no_error ON ((error.date = no_error.date))) \
-			ORDER BY error.no_views DESC;")
-	c.execute(
-		"SELECT date, round(percent::numeric,2) \
-			FROM \
-				(SELECT date, (no_views/views::float)*100 AS percent \
-				FROM all_views) AS foo \
-				WHERE percent > 1;")
-	errors = c.fetchall()
-	whitespace = ' '
-	conn.close()
-	print('The days with more than one percent of requests lead to errors:')
-	for row in errors:
-		dates = u'\u2022' + ' %s -- %s views' % row
-		print('  ' + whitespace.join(dates.split()))
-		
-	print('\n')
+    """Prints which days did more than 1% of requests lead to errors"""
+    most_errors = sql_query(request_errors)
+    print('The days with more than one percent of requests lead to errors:')
+    for row in most_errors:
+        print(('  ' + u'\u2022' + ' {} -- {} views').format(row[0],row[1]))
+    print('\n')
 
 
-most_errors()
+if __name__ == '__main__':
+    top_articles()
+    top_authors()
+    most_errors()
