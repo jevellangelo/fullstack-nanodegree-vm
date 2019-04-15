@@ -4,3 +4,5 @@ vagrant/.DS_Store
 vagrant/.DS_Store
 vagrant/forum/.DS_Store
 vagrant/forum/solution/.DS_Storevagrant/.DS_Store
+vagrant/redis-stable/00-RELEASENOTES vagrant/redis-stable/BUGS vagrant/redis-stable/CONTRIBUTING vagrant/redis-stable/COPYING vagrant/redis-stable/INSTALL vagrant/redis-stable/MANIFESTO vagrant/redis-stable/Makefile vagrant/redis-stable/README.md vagrant/redis-stable/deps vagrant/redis-stable/redis.conf vagrant/redis-stable/runtest vagrant/redis-stable/runtest-cluster vagrant/redis-stable/runtest-sentinel vagrant/redis-stable/sentinel.conf vagrant/redis-stable/src vagrant/redis-stable/tests vagrant/redis-stable/utils
+vagrant/.DS_Store
